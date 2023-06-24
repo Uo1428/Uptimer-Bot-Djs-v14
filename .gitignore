@@ -1,2 +1,1 @@
-git filter-branch --index-filter "git rm --cached --ignore-unmatch .env" -- --all
-node_modules
+.env

@@ -31,7 +31,7 @@ client.login(process.env.TOKEN).catch((error) => { console.log((error.message).b
 
 module.exports = client;
 
-// auto kill
+// auto kill 
 setInterval(() => {
   if (set.REPL_SETTINGS.AUTO_KILL && set.REPL_USER) {
     if (!client || !client.user) {
