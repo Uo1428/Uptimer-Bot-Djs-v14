@@ -1,5 +1,6 @@
 const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js');
 const set = require(`${process.cwd()}/Assets/Config/settings`);
+require("dotenv").config()
 require(`colors`)
 const client = new Client({
   allowedMentions: {
@@ -18,10 +19,12 @@ const client = new Client({
 });
 
 
-[`variables`, `extraEvents`, `checker`, `mongo_db`, `server`, 'slashCommand', 'events', `antiCrash`].forEach((handler) => {
+
+[`variables`, `extraEvents`, `mongo_db`, `server`, 'slashCommand', 'events', `antiCrash`].forEach((handler) => {
   const file = require(`./src/handlers/${handler}`)
   if (file.execute) file.execute(client);
   else file(client);
+  console.log(process.env.TOKEN);
 });
 
 client.login(process.env.TOKEN).catch((error) => { console.log((error.message).bold.red) });
@@ -29,7 +32,7 @@ client.login(process.env.TOKEN).catch((error) => { console.log((error.message).b
 
 module.exports = client;
 
-// auto kill 
+// auto kill
 setInterval(() => {
   if (set.REPL_SETTINGS.AUTO_KILL && set.REPL_USER) {
     if (!client || !client.user) {
